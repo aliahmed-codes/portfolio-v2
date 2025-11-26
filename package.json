@@ -19,8 +19,11 @@
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "prepare": "husky install",
+    "prepare": "echo \"skip husky on vercel\"",
     "lint-staged": "lint-staged"
+  },
+  "engines": {
+    "node": "14.x"
   },
   "lint-staged": {
     "*.{js,css,json,md}": [

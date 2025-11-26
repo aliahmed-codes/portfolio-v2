@@ -156,9 +156,8 @@ const About = () => {
                 href="https://www.linkedin.com/in/mianahmadbasit/"
                 target="_blank"
                 rel="noreferrer">
-                Mian Ahmed Basit
-              </a>{' '}
-              from Arfa Software Technology.
+                Mian Ahmed Basit.
+              </a>
             </p>
 
             <p>
