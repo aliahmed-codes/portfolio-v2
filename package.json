@@ -23,7 +23,7 @@
     "lint-staged": "lint-staged"
   },
   "engines": {
-    "node": "14.x"
+    "node": "16.x"
   },
   "lint-staged": {
     "*.{js,css,json,md}": [
