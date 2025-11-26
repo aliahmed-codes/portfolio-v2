@@ -60,18 +60,42 @@ const Hero = () => {
   }, []);
 
   const one = <h1>Hi, my name is</h1>;
-  const two = <h2 className="big-heading">Brittany Chiang.</h2>;
+  const two = <h2 className="big-heading">Ali Ahmed.</h2>;
   const three = <h3 className="big-heading">I build things for the web.</h3>;
   const four = (
     <>
       <p>
-        I’m a software engineer specializing in building (and occasionally designing) exceptional
-        digital experiences. Currently, I’m focused on building accessible, human-centered products
-        at{' '}
-        <a href="https://upstatement.com/" target="_blank" rel="noreferrer">
-          Upstatement
+        I’m a full-stack developer who enjoys creating fast, clean and reliable digital experiences.
+        I work with{' '}
+        <a href="https://react.dev/" target="_blank" rel="noreferrer">
+          React
         </a>
-        .
+        ,{' '}
+        <a href="https://nextjs.org/" target="_blank" rel="noreferrer">
+          Next.js
+        </a>
+        ,{' '}
+        <a href="https://wordpress.org/" target="_blank" rel="noreferrer">
+          WordPress
+        </a>
+        ,{' '}
+        <a href="https://www.shopify.com/" target="_blank" rel="noreferrer">
+          Shopify
+        </a>
+        ,{' '}
+        <a href="https://nodejs.org/" target="_blank" rel="noreferrer">
+          Node.js
+        </a>{' '}
+        and{' '}
+        <a href="https://bun.sh/" target="_blank" rel="noreferrer">
+          Bun
+        </a>{' '}
+        to build custom solutions that solve real problems. I’m currently focused on crafting
+        polished, meaningful work aimed at{' '}
+        <a href="https://www.awwwards.com/" target="_blank" rel="noreferrer">
+          award-level
+        </a>{' '}
+        recognition.
       </p>
     </>
   );

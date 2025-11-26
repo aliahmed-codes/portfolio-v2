@@ -1,9 +1,9 @@
 ---
-date: '2017-04-01'
-title: 'Developer'
-company: 'Scout Studio'
-location: 'Northeastern University'
-range: 'Spring 2016 & 2017'
+date: '2024-09-01'
+title: 'Senior Frontend Developer'
+company: 'E-shaafi'
+location: 'DHA Phase 8 Lahore'
+range: 'September - December 2024'
 url: 'https://web.northeastern.edu/scout/'
 ---
 

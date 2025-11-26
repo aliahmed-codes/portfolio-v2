@@ -125,7 +125,18 @@ const About = () => {
     sr.reveal(revealContainer.current, srConfig());
   }, []);
 
-  const skills = ['JavaScript (ES6+)', 'TypeScript', 'React', 'Eleventy', 'Node.js', 'WordPress'];
+  const skills = [
+    'JavaScript (ES6+)',
+    'TypeScript',
+    'React',
+    'Next.js',
+    'Node.js',
+    'WordPress (custom theme builds)',
+    'Shopify (custom themes)',
+    'Server setup & management',
+    'MongoDB',
+    'PostgreSQL',
+  ];
 
   return (
     <StyledAboutSection id="about" ref={revealContainer}>
@@ -135,30 +146,53 @@ const About = () => {
         <StyledText>
           <div>
             <p>
-              Hello! My name is Brittany and I enjoy creating things that live on the internet. My
-              interest in web development started back in 2012 when I decided to try editing custom
-              Tumblr themes — turns out hacking together a custom reblog button taught me a lot
-              about HTML &amp; CSS!
-            </p>
-
-            <p>
-              Fast-forward to today, and I’ve had the privilege of working at{' '}
-              <a href="https://us.mullenlowe.com/">an advertising agency</a>,{' '}
-              <a href="https://starry.com/">a start-up</a>,{' '}
-              <a href="https://www.apple.com/">a huge corporation</a>, and{' '}
-              <a href="https://scout.camd.northeastern.edu/">a student-led design studio</a>. My
-              main focus these days is building accessible, inclusive products and digital
-              experiences at <a href="https://upstatement.com/">Upstatement</a> for a variety of
-              clients.
-            </p>
-
-            <p>
-              I also recently{' '}
-              <a href="https://www.newline.co/courses/build-a-spotify-connected-app">
-                launched a course
+              Hello! My name is Ali Ahmed, and I enjoy creating things that live on the internet. My
+              journey in web development began in 2020 when I first got internet access at home and
+              first time intrect with web industery. I started with WordPress and, within a year,
+              landed my first client from the local Pakistani market. In 2023, I officially dove
+              into coding and learned the MERN stack under the guidance of an incredible teacher and
+              mentor,{' '}
+              <a
+                href="https://www.linkedin.com/in/mianahmadbasit/"
+                target="_blank"
+                rel="noreferrer">
+                Mian Ahmed Basit
               </a>{' '}
-              that covers everything you need to build a web app with the Spotify API using Node
-              &amp; React.
+              from Arfa Software Technology.
+            </p>
+
+            <p>
+              Fast-forward to today, I’ve had the privilege of working at
+              <a href="https://futuredevsolutions.com/" target="_blank" rel="noreferrer">
+                a software development services company
+              </a>
+              ,{' '}
+              <a
+                href="https://www.linkedin.com/company/textcom-solutions/"
+                target="_blank"
+                rel="noreferrer">
+                a start-up
+              </a>
+              , and{' '}
+              <a href="https://www.eshaafi.com/" target="_blank" rel="noreferrer">
+                a digital healthcare / telehealth platform
+              </a>
+              . These days, I focus on providing web-based solutions to international clients in the
+              UK and Spain, and building award-level UI/UX projects at
+              <a href="https://signalovernoise.io/" target="_blank" rel="noreferrer">
+                Signal Over Noise
+              </a>
+              .
+            </p>
+
+            <p>
+              I also recently created a{' '}
+              <a href="https://www.drhafizharoon.com/" target="_blank" rel="noreferrer">
+                portfolio for a doctor
+              </a>
+              , where users can book appointments and attend meetings online directly on the site,
+              without needing Google Meet. The platform also includes an admin panel so doctors can
+              manage appointments, services, pricing, and even publish blogs.
             </p>
 
             <p>Here are a few technologies I’ve been working with recently:</p>
