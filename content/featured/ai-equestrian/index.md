@@ -1,5 +1,5 @@
 ---
-date: '2024'
+date: '2'
 title: 'AI Equestrian – AI-Powered Riding Analysis Platform'
 cover: './ai-equestrian.png'
 external: 'https://equineaintelligence.com/'

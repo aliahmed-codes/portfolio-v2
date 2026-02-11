@@ -1,7 +1,7 @@
 ---
-date: '2'
+date: '3'
 title: 'Spotify Profile'
-cover: './demo.png'
+cover: './atelier001.png'
 github: 'https://github.com/bchiang7/spotify-profile'
 external: 'https://spotify-profile.herokuapp.com/'
 tech:

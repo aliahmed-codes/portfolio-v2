@@ -1,7 +1,7 @@
 ---
-date: '3'
+date: '1'
 title: 'Build a Spotify Connected App'
-cover: './course-card.png'
+cover: './drhafizharoon.png'
 external: 'https://www.newline.co/courses/build-a-spotify-connected-app'
 cta: 'https://www.newline.co/courses/build-a-spotify-connected-app'
 tech:
