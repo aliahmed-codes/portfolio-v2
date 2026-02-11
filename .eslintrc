@@ -1,7 +1,17 @@
 {
   "root": true,
-  "extends": ["react-app"],
+  "extends": ["react-app", "prettier"],
+  "plugins": ["react", "jsx-a11y"],
   "rules": {
     "react/react-in-jsx-scope": "off",
+    "no-unused-vars": "warn",
+    "jsx-a11y/accessible-emoji": "off",
+  },
+  "parserOptions": {
+    "ecmaVersion": 2021,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true,
+    },
   },
 }
