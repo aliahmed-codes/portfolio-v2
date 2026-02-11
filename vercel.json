@@ -1,8 +1,6 @@
 {
-  "build": {
-    "env": {
-      "NODE_VERSION": "16"
-    }
-  },
-  "framework": "gatsby"
+  "buildCommand": "npm run build",
+  "outputDirectory": "public",
+  "framework": "gatsby",
+  "installCommand": "npm install"
 }
