@@ -1,12 +1,13 @@
 import { useEffect, useState, useRef } from 'react';
 import { gsap } from 'gsap';
 import { Menu, X } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
 
 const navLinks = [
-  { label: 'WORK', href: '#work' },
-  { label: 'ABOUT', href: '#about' },
-  { label: 'EXPERIENCE', href: '#experience' },
-  { label: 'CONTACT', href: '#contact' },
+  { label: 'WORK', href: '/#work' },
+  { label: 'PROJECTS', href: '/projects' },
+  { label: 'ABOUT', href: '/#about' },
+  { label: 'CONTACT', href: '/#contact' },
 ];
 
 export default function Navigation() {
@@ -14,6 +15,7 @@ export default function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -51,10 +53,28 @@ export default function Navigation() {
     e.preventDefault();
     setIsMobileMenuOpen(false);
     
-    const target = document.querySelector(href);
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth' });
+    // If it's a hash link on the home page
+    if (href.startsWith('/#')) {
+      const targetId = href.replace('/#', '');
+      
+      // If we're not on the home page, navigate there first
+      if (location.pathname !== '/') {
+        window.location.href = href;
+        return;
+      }
+      
+      const target = document.querySelector(`#${targetId}`);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      // Regular navigation
+      window.location.href = href;
     }
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -67,16 +87,18 @@ export default function Navigation() {
       >
         <div className="container-custom flex items-center justify-between">
           {/* Logo */}
-          <a 
-            href="#" 
+          <Link 
+            to="/" 
             className="font-heading text-2xl font-bold text-white hover:text-[#2DD4BF] transition-colors"
             onClick={(e) => {
-              e.preventDefault();
-              window.scrollTo({ top: 0, behavior: 'smooth' });
+              if (location.pathname === '/') {
+                e.preventDefault();
+                scrollToTop();
+              }
             }}
           >
             AA.
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-10">

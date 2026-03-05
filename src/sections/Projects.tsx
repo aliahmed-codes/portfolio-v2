@@ -1,90 +1,30 @@
-import { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ArrowUpRight, ExternalLink } from 'lucide-react';
+import { useEffect, useRef, useState } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ArrowUpRight, ExternalLink } from "lucide-react";
+import { Link } from "react-router-dom";
+import type { Project } from "@/types/project";
+import { loadAllProjects } from "@/lib/projects";
 
 gsap.registerPlugin(ScrollTrigger);
 
-interface Project {
-  id: string;
-  title: string;
-  category: string;
-  description: string;
-  image: string;
-  liveUrl: string;
-  githubUrl?: string;
-  technologies: string[];
-  featured?: boolean;
-}
-
-const projects: Project[] = [
-  {
-    id: 'ai-equestrian',
-    title: 'AI EQUESTRIAN',
-    category: 'AI / Web Platform',
-    description: 'Training platform for dressage riders with AI-powered video analysis using YOLO and GPT models.',
-    image: '/projects/ai-equestrian.jpg',
-    liveUrl: 'https://equineaintelligence.com/',
-    technologies: ['React', 'Next.js', 'Python', 'YOLO', 'GPT', 'Supabase'],
-    featured: true,
-  },
-  {
-    id: 'shopmaster-pro',
-    title: 'SHOPMASTER PRO',
-    category: 'E-Commerce',
-    description: 'Headless Shopify solution for modern retail with custom checkout and inventory management.',
-    image: '/projects/shopmaster.jpg',
-    liveUrl: '#',
-    githubUrl: '#',
-    technologies: ['Shopify', 'Next.js', 'GraphQL', 'Node.js'],
-  },
-  {
-    id: 'dr-portfolio',
-    title: 'DR. PORTFOLIO',
-    category: 'Medical / Web Design',
-    description: 'Minimalist portfolio for a healthcare professional with appointment booking system.',
-    image: '/projects/dr-portfolio.jpg',
-    liveUrl: '#',
-    technologies: ['React', 'Tailwind', 'Framer Motion'],
-  },
-  {
-    id: 'algolia-search',
-    title: 'ALGOLIA SEARCH',
-    category: 'Developer Tool',
-    description: 'Advanced search integration with faceted filtering and real-time suggestions.',
-    image: '/projects/algolia-search.jpg',
-    liveUrl: '#',
-    githubUrl: '#',
-    technologies: ['Algolia', 'React', 'TypeScript'],
-  },
-  {
-    id: 'google-keep-clone',
-    title: 'KEEP CLONE',
-    category: 'Productivity App',
-    description: 'Full-featured note-taking app with labels, reminders, and collaborative editing.',
-    image: '/projects/keep-clone.jpg',
-    liveUrl: '#',
-    githubUrl: '#',
-    technologies: ['React', 'Firebase', 'Material UI'],
-  },
-  {
-    id: 'spotify-profile',
-    title: 'SPOTIFY PROFILE',
-    category: 'Data Visualization',
-    description: 'Visualize your Spotify listening history with beautiful charts and insights.',
-    image: '/projects/spotify-profile.jpg',
-    liveUrl: '#',
-    githubUrl: '#',
-    technologies: ['Next.js', 'Spotify API', 'D3.js'],
-  },
-];
-
 export default function Projects() {
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [loading, setLoading] = useState(true);
   const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    loadAllProjects().then((data) => {
+      setProjects(data);
+      setLoading(false);
+    });
+  }, []);
+
+  useEffect(() => {
+    if (loading) return;
+
     const section = sectionRef.current;
     const header = headerRef.current;
     const grid = gridRef.current;
@@ -101,17 +41,17 @@ export default function Projects() {
           opacity: 1,
           stagger: 0.1,
           duration: 0.8,
-          ease: 'power3.out',
+          ease: "power3.out",
           scrollTrigger: {
             trigger: header,
-            start: 'top 80%',
-            toggleActions: 'play none none reverse',
+            start: "top 80%",
+            toggleActions: "play none none reverse",
           },
-        }
+        },
       );
 
       // Project cards animation
-      const cards = grid.querySelectorAll('.project-card-wrapper');
+      const cards = grid.querySelectorAll(".project-card-wrapper");
       cards.forEach((card, index) => {
         gsap.fromTo(
           card,
@@ -120,27 +60,38 @@ export default function Projects() {
             y: 0,
             opacity: 1,
             duration: 0.8,
-            ease: 'power3.out',
+            ease: "power3.out",
             scrollTrigger: {
               trigger: card,
-              start: 'top 85%',
-              toggleActions: 'play none none reverse',
+              start: "top 85%",
+              toggleActions: "play none none reverse",
             },
             delay: index * 0.1,
-          }
+          },
         );
       });
     }, section);
 
     return () => ctx.revert();
-  }, []);
+  }, [loading]);
+
+  const featuredProject = projects.find((p) => p.featured);
+  const displayProjects = projects.filter((p) => !p.featured).slice(0, 5);
+
+  if (loading) {
+    return (
+      <section ref={sectionRef} id="work" className="section-padding relative">
+        <div className="container-custom">
+          <div className="text-center text-[#2DD4BF] font-mono">
+            Loading projects...
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
-    <section
-      ref={sectionRef}
-      id="work"
-      className="section-padding relative"
-    >
+    <section ref={sectionRef} id="work" className="section-padding relative">
       <div className="container-custom">
         {/* Section Header */}
         <div ref={headerRef} className="mb-16 lg:mb-24">
@@ -152,46 +103,46 @@ export default function Projects() {
             SELECTED WORK
           </h2>
           <p className="text-[#9CA3AF] text-lg max-w-xl">
-            A collection of projects where code meets design. Each one crafted with attention to detail and a focus on user experience.
+            A collection of projects where code meets design. Each one crafted
+            with attention to detail and a focus on user experience.
           </p>
         </div>
 
         {/* Bento Grid */}
-        <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div
+          ref={gridRef}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
           {/* Featured Project - Large */}
-          <div className="project-card-wrapper md:col-span-2 lg:col-span-2 lg:row-span-2">
-            <ProjectCard project={projects[0]} size="large" />
-          </div>
+          {featuredProject && (
+            <div className="project-card-wrapper md:col-span-2 lg:col-span-2 lg:row-span-2">
+              <ProjectCard project={featuredProject} size="large" />
+            </div>
+          )}
 
-          {/* Medium Projects */}
-          <div className="project-card-wrapper">
-            <ProjectCard project={projects[1]} size="medium" />
-          </div>
-          <div className="project-card-wrapper">
-            <ProjectCard project={projects[2]} size="medium" />
-          </div>
+          {/* Other Projects */}
+          {displayProjects.slice(0, 2).map((project) => (
+            <div key={project.id} className="project-card-wrapper">
+              <ProjectCard project={project} size="medium" />
+            </div>
+          ))}
 
-          {/* Small Projects */}
-          <div className="project-card-wrapper">
-            <ProjectCard project={projects[3]} size="small" />
-          </div>
-          <div className="project-card-wrapper">
-            <ProjectCard project={projects[4]} size="small" />
-          </div>
-          <div className="project-card-wrapper md:col-span-2 lg:col-span-1">
-            <ProjectCard project={projects[5]} size="small" />
-          </div>
+          {displayProjects.slice(2, 5).map((project) => (
+            <div key={project.id} className="project-card-wrapper">
+              <ProjectCard project={project} size="small" />
+            </div>
+          ))}
         </div>
 
         {/* View All Button */}
         <div className="mt-16 text-center">
-          <a
-            href="#"
+          <Link
+            to="/projects"
             className="inline-flex items-center gap-3 px-8 py-4 border border-[#2DD4BF]/50 text-[#2DD4BF] font-mono text-sm rounded-lg hover:bg-[#2DD4BF]/10 transition-all duration-300 group"
           >
             VIEW ALL PROJECTS
             <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-          </a>
+          </Link>
         </div>
       </div>
     </section>
@@ -200,7 +151,7 @@ export default function Projects() {
 
 interface ProjectCardProps {
   project: Project;
-  size: 'large' | 'medium' | 'small';
+  size: "large" | "medium" | "small";
 }
 
 function ProjectCard({ project, size }: ProjectCardProps) {
@@ -220,7 +171,7 @@ function ProjectCard({ project, size }: ProjectCardProps) {
       x: x * 20,
       y: y * 20,
       duration: 0.5,
-      ease: 'power2.out',
+      ease: "power2.out",
     });
   };
 
@@ -232,12 +183,22 @@ function ProjectCard({ project, size }: ProjectCardProps) {
       x: 0,
       y: 0,
       duration: 0.5,
-      ease: 'power2.out',
+      ease: "power2.out",
     });
   };
 
-  const aspectRatio = size === 'large' ? 'aspect-[16/10]' : size === 'medium' ? 'aspect-[4/3]' : 'aspect-[16/10]';
-  const titleSize = size === 'large' ? 'text-2xl sm:text-3xl lg:text-4xl' : size === 'medium' ? 'text-xl sm:text-2xl' : 'text-lg sm:text-xl';
+  const aspectRatio =
+    size === "large"
+      ? "aspect-[16/10]"
+      : size === "medium"
+        ? "aspect-[4/3]"
+        : "aspect-[16/10]";
+  const titleSize =
+    size === "large"
+      ? "text-2xl sm:text-3xl lg:text-4xl"
+      : size === "medium"
+        ? "text-xl sm:text-2xl"
+        : "text-lg sm:text-xl";
 
   return (
     <div
@@ -246,14 +207,11 @@ function ProjectCard({ project, size }: ProjectCardProps) {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
-      <a
-        href={project.liveUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="block relative h-full"
-      >
+      <Link to={`/projects/${project.id}`} className="block relative h-full">
         {/* Image Container */}
-        <div className={`relative ${aspectRatio} overflow-hidden rounded-2xl bg-[#111827]`}>
+        <div
+          className={`relative ${aspectRatio} overflow-hidden rounded-2xl bg-[#111827]`}
+        >
           <img
             ref={imageRef}
             src={project.image}
@@ -261,49 +219,58 @@ function ProjectCard({ project, size }: ProjectCardProps) {
             className="project-card-image absolute inset-0 w-full h-full object-cover"
             loading="lazy"
           />
-          
-          {/* Overlay */}
-          <div className="project-card-overlay" />
+
+          {/* Dark Gradient Overlay - Improved for readability */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/20 group-hover:from-black/95 group-hover:via-black/60 transition-all duration-500" />
+
+          {/* Additional solid overlay for better text contrast */}
+          <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors duration-500" />
 
           {/* Content Overlay */}
           <div className="absolute inset-0 p-6 sm:p-8 flex flex-col justify-end">
             {/* Category */}
-            <span className="font-mono text-xs sm:text-sm text-[#2DD4BF] tracking-wider mb-2">
+            <span className="font-mono text-xs sm:text-sm text-[#2DD4BF] tracking-wider mb-2 drop-shadow-lg">
               {project.category}
             </span>
 
             {/* Title */}
-            <h3 className={`font-heading ${titleSize} font-bold text-white mb-2 group-hover:text-[#2DD4BF] transition-colors`}>
+            <h3
+              className={`font-heading ${titleSize} font-bold text-white mb-2 group-hover:text-[#2DD4BF] transition-colors drop-shadow-lg`}
+            >
               {project.title}
             </h3>
 
             {/* Description - Only for large cards */}
-            {size === 'large' && (
-              <p className="text-[#9CA3AF] text-sm sm:text-base max-w-lg mb-4 line-clamp-2">
+            {size === "large" && (
+              <p className="text-gray-200 text-sm sm:text-base max-w-lg mb-4 line-clamp-2 drop-shadow-md font-medium">
                 {project.description}
               </p>
             )}
 
             {/* Technologies */}
             <div className="flex flex-wrap gap-2 mt-2">
-              {project.technologies.slice(0, size === 'large' ? 4 : 3).map((tech) => (
-                <span
-                  key={tech}
-                  className="px-3 py-1 text-xs font-mono text-[#9CA3AF] bg-black/50 rounded-full backdrop-blur-sm"
-                >
-                  {tech}
-                </span>
-              ))}
+              {project.technologies
+                .slice(0, size === "large" ? 4 : 3)
+                .map((tech) => (
+                  <span
+                    key={tech}
+                    className="px-3 py-1 text-xs font-mono text-white bg-black/60 rounded-full backdrop-blur-sm border border-white/10 shadow-lg"
+                  >
+                    {tech}
+                  </span>
+                ))}
             </div>
 
             {/* View Project Link */}
             <div className="mt-4 flex items-center gap-2 text-[#2DD4BF] opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
-              <span className="font-mono text-sm">VIEW PROJECT</span>
+              <span className="font-mono text-sm font-semibold drop-shadow-lg">
+                VIEW CASE STUDY
+              </span>
               <ExternalLink className="w-4 h-4" />
             </div>
           </div>
         </div>
-      </a>
+      </Link>
     </div>
   );
 }

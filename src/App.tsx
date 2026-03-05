@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import Lenis from '@studio-freight/lenis';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Navigation from './sections/Navigation';
 import Hero from './sections/Hero';
 import Projects from './sections/Projects';
@@ -10,10 +11,22 @@ import Experience from './sections/Experience';
 import Contact from './sections/Contact';
 import Footer from './sections/Footer';
 import CustomCursor from './components/CustomCursor';
+import ProjectsPage from './pages/ProjectsPage';
+import ProjectDetail from './pages/ProjectDetail';
 
 gsap.registerPlugin(ScrollTrigger);
 
-function App() {
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  
+  return null;
+}
+
+function HomePage() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
   const lenisRef = useRef<Lenis | null>(null);
@@ -85,6 +98,19 @@ function App() {
 
       <Footer />
     </div>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <ScrollToTop />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/projects" element={<ProjectsPage />} />
+        <Route path="/projects/:id" element={<ProjectDetail />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

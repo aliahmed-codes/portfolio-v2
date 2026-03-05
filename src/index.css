@@ -367,3 +367,64 @@ html.lenis {
 .lenis.lenis-scrolling iframe {
   pointer-events: none;
 }
+
+/* Markdown Content Styles */
+.markdown-content h1 {
+  @apply font-heading text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-8;
+}
+
+.markdown-content h2 {
+  @apply font-heading text-2xl sm:text-3xl font-bold text-white mt-12 mb-6;
+}
+
+.markdown-content h3 {
+  @apply font-heading text-xl sm:text-2xl font-semibold text-white mt-8 mb-4;
+}
+
+.markdown-content p {
+  @apply text-[#9CA3AF] text-base sm:text-lg leading-relaxed mb-6;
+}
+
+.markdown-content ul {
+  @apply list-disc list-inside text-[#9CA3AF] space-y-2 mb-6;
+}
+
+.markdown-content ol {
+  @apply list-decimal list-inside text-[#9CA3AF] space-y-2 mb-6;
+}
+
+.markdown-content li {
+  @apply text-base sm:text-lg leading-relaxed;
+}
+
+.markdown-content strong {
+  @apply text-white font-semibold;
+}
+
+.markdown-content blockquote {
+  @apply border-l-4 border-[#2DD4BF] pl-6 py-2 my-8 bg-[#2DD4BF]/5 rounded-r-lg;
+}
+
+.markdown-content blockquote p {
+  @apply text-white italic mb-0;
+}
+
+.markdown-content code {
+  @apply font-mono text-sm bg-[#1F2937] text-[#2DD4BF] px-2 py-1 rounded;
+}
+
+.markdown-content pre {
+  @apply bg-[#111827] rounded-lg p-4 overflow-x-auto mb-6;
+}
+
+.markdown-content pre code {
+  @apply bg-transparent text-[#9CA3AF] px-0 py-0;
+}
+
+.markdown-content hr {
+  @apply border-[#1F2937] my-12;
+}
+
+.markdown-content a {
+  @apply text-[#2DD4BF] hover:underline;
+}
