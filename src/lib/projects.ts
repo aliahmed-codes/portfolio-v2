@@ -96,7 +96,7 @@ export async function loadProject(id: string): Promise<Project | null> {
     const markdown = await response.text();
     const { data, content } = parseFrontmatter(markdown);
 
-    const frontmatter = data as ProjectFrontmatter;
+    const frontmatter = data as unknown as ProjectFrontmatter;
 
     return {
       ...frontmatter,
