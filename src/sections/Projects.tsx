@@ -224,7 +224,7 @@ function ProjectCard({ project, size }: ProjectCardProps) {
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/20 group-hover:from-black/95 group-hover:via-black/60 transition-all duration-500" />
 
           {/* Additional solid overlay for better text contrast */}
-          <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors duration-500" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-900/95 via-slate-900/60 to-transparent group-hover:from-slate-900 group-hover:via-slate-800/70 transition-all duration-500" />
 
           {/* Content Overlay */}
           <div className="absolute inset-0 p-6 sm:p-8 flex flex-col justify-end">

@@ -178,7 +178,10 @@ export default function ProjectDetail() {
       {/* Main Content */}
       <main className="relative">
         {/* Hero Section */}
-        <section ref={heroRef} className="relative min-h-[90vh] flex flex-col">
+        <section
+          ref={heroRef}
+          className="relative min-h-[90vh] flex flex-col mt-24"
+        >
           {/* Background Image */}
           <div className="absolute inset-0">
             <img
@@ -186,10 +189,11 @@ export default function ProjectDetail() {
               alt={project.title}
               className="w-full h-full object-cover"
             />
-            {/* Enhanced Gradient Overlay for better text readability */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0B0F19] via-[#0B0F19]/70 to-[#0B0F19]/40" />
-            {/* Additional dark overlay at bottom for text contrast */}
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#0B0F19]/80" />
+            {/* Dark Gradient Overlay - Improved for readability */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/20 group-hover:from-black/95 group-hover:via-black/60 transition-all duration-500" />
+
+            {/* Additional solid overlay for better text contrast */}
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/95 via-slate-900/60 to-transparent group-hover:from-slate-900 group-hover:via-slate-800/70 transition-all duration-500" />
           </div>
 
           {/* Content */}
